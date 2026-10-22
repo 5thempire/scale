@@ -99,6 +99,7 @@ body {
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .device__controls {
@@ -522,14 +523,57 @@ kbd {
 
   .device__controls { gap: 10px; }
   .panel { grid-template-columns: 1fr; padding: 8px; }
-  .pads { grid-template-columns: repeat(6, 1fr); gap: 5px; padding: 5px; }
-  .pad { aspect-ratio: 1.15; }
+  .pads { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 5px; padding: 5px; }
+  .pad { aspect-ratio: 1.15; padding: 0; font-size: 10px; }
   .grille { display: none; }
   .wordmark { gap: 10px; }
-  .slider__labels { height: 46px; }
+  .slider__groove { height: 34px; }
+  .slider__cap { width: 34px; height: 26px; }
+  .slider__labels { height: 50px; }
+  .slider__labels span { font-size: 10px; }
   .device__keys { padding: 10px; }
+  .key--black .key__label { font-size: 0.2px; }
 
   .readout { grid-template-columns: 1fr 1fr; }
   .readout__cell--wide { grid-column: 1 / -1; }
   .extras { grid-template-columns: 1fr; }
+}
+
+/* ------------------------------------------------------------- phone landscape */
+
+/* Fit the whole device in one screen: controls on the left, keys sized to the viewport height. */
+@media (orientation: landscape) and (max-height: 500px) {
+  .stage { padding: 8px 12px 32px; gap: 16px; }
+  .masthead { display: none; }
+
+  .device {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 20px;
+  }
+
+  .device__controls { gap: 8px; justify-content: center; }
+  .panel { grid-template-columns: 1fr; padding: 6px; border-radius: 12px; }
+  .pads { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 5px; padding: 5px; }
+  .pad { aspect-ratio: 1.4; padding: 0; font-size: 10px; }
+  .grille { display: none; }
+  .wordmark { gap: 10px; font-size: 10px; }
+  .slider__groove { height: 28px; }
+  .slider__cap { width: 34px; height: 24px; }
+  .slider__labels { height: 38px; }
+  .slider__labels span { font-size: 10px; }
+
+  .device__keys { padding: 10px; border-radius: 16px; }
+  /* Height: viewport minus stage top padding, device padding and well padding,
+     capped so the keys stay within ~56% of the width (viewBox is 7 × 4.22) and the controls keep room. */
+  .keys {
+    width: auto;
+    height: min(100vh - 52px, 33.8vw);
+    height: min(100svh - 52px, 33.8vw);
+  }
+
+  .readout { grid-template-columns: 2.2fr repeat(4, 1fr); }
+  .readout__cell--wide { grid-column: auto; }
+  .extras { grid-template-columns: 1fr 1fr; }
 }
