@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scale Pocket</title>
+  <meta name="description" content="A web version of the Scale Pocket: a two-octave mini keyboard that lights up scales.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%236a2ed8%22/%3E%3Crect x=%226%22 y=%2214%22 width=%225%22 height=%2212%22 rx=%221.5%22 fill=%22%23f8a043%22/%3E%3Crect x=%2213.5%22 y=%2214%22 width=%225%22 height=%2212%22 rx=%221.5%22 fill=%22%23f8a043%22/%3E%3Crect x=%2221%22 y=%2214%22 width=%225%22 height=%2212%22 rx=%221.5%22 fill=%22%23f8a043%22/%3E%3Crect x=%229%22 y=%226%22 width=%225%22 height=%227%22 rx=%221.5%22 fill=%22%231f1e24%22/%3E%3Crect x=%2218%22 y=%226%22 width=%225%22 height=%227%22 rx=%221.5%22 fill=%22%231f1e24%22/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <main class="stage">
+    <header class="masthead">
+      <h1 class="masthead__title"><span>Scale</span>Pocket</h1>
+      <p class="masthead__tag">Pick a root and a mode — the keys light up the scale.</p>
+    </header>
+
+    <section class="device" aria-label="Scale Pocket">
+      <div class="device__controls">
+        <div class="panel">
+          <div class="pads">
+            <button class="pad" data-action="sustain" aria-pressed="false">Sustain</button>
+            <button class="pad" data-action="oct+">Oct+</button>
+            <button class="pad" data-action="vol+">Vol+</button>
+            <button class="pad" data-action="fixvel" aria-pressed="false">Fix Vel</button>
+            <button class="pad" data-action="oct-">Oct−</button>
+            <button class="pad" data-action="vol-">Vol−</button>
+          </div>
+          <div class="grille" aria-hidden="true"></div>
+        </div>
+        <div class="wordmark" aria-hidden="true">Scale Pocket</div>
+        <div class="sliders">
+          <div id="slider-timbre"></div>
+          <div id="slider-root"></div>
+          <div id="slider-mode"></div>
+        </div>
+      </div>
+      <div class="device__keys">
+        <svg id="keys" class="keys"></svg>
+      </div>
+    </section>
+
+    <section class="readout" aria-live="polite">
+      <div class="readout__cell readout__cell--wide">
+        <span class="readout__label">Scale</span>
+        <strong id="readout-scale"></strong>
+        <span id="readout-notes" class="readout__mono"></span>
+        <span id="readout-formula" class="readout__dim"></span>
+        <ul class="legend" aria-label="Key light colours">
+          <li class="legend--green">Root</li>
+          <li class="legend--red">Main octave</li>
+          <li class="legend--blue">Other octave</li>
+        </ul>
+      </div>
+      <div class="readout__cell">
+        <span class="readout__label">Voice</span>
+        <strong id="readout-voice"></strong>
+        <span id="readout-channel" class="readout__dim"></span>
+      </div>
+      <div class="readout__cell">
+        <span class="readout__label">Octave</span>
+        <strong id="readout-octave"></strong>
+        <span id="readout-range" class="readout__dim"></span>
+      </div>
+      <div class="readout__cell">
+        <span class="readout__label">Volume · Velocity</span>
+        <strong id="readout-volume"></strong>
+        <span id="readout-velocity" class="readout__dim"></span>
+      </div>
+      <div class="readout__cell">
+        <span class="readout__label">Playing</span>
+        <strong id="readout-playing" class="readout__mono"></strong>
+      </div>
+    </section>
+
+    <section class="extras">
+      <div class="card">
+        <h2>MIDI</h2>
+        <p class="card__text">Use the page as a controller for your DAW or synth, or play it from a MIDI keyboard.</p>
+        <button id="midi-connect" class="action">Connect MIDI</button>
+        <div id="midi-ports" class="ports" hidden>
+          <label>Output <select id="midi-out"></select></label>
+          <label>Input <select id="midi-in"></select></label>
+        </div>
+        <p id="midi-status" class="card__status"></p>
+      </div>
+      <div class="card">
+        <h2>Computer keyboard</h2>
+        <dl class="shortcuts">
+          <dt><kbd>Z</kbd>–<kbd>M</kbd></dt><dd>Lower octave (<kbd>S D G H J</kbd> sharps)</dd>
+          <dt><kbd>Q</kbd>–<kbd>U</kbd></dt><dd>Upper octave (<kbd>2 3 5 6 7</kbd> sharps)</dd>
+          <dt><kbd>Shift</kbd></dt><dd>Hold for full velocity</dd>
+          <dt><kbd>Space</kbd></dt><dd>Sustain</dd>
+          <dt><kbd>−</kbd> <kbd>=</kbd></dt><dd>Octave down / up</dd>
+          <dt><kbd>[</kbd> <kbd>]</kbd></dt><dd>Volume down / up</dd>
+          <dt><kbd>\</kbd></dt><dd>Fixed velocity</dd>
+        </dl>
+        <p class="card__text">With a mouse or finger, strike nearer the front edge of a key to play louder. Drag across keys to glide.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
